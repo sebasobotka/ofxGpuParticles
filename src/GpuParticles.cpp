@@ -36,7 +36,6 @@ namespace nm
     const string GpuParticles::UNIFORM_PREFIX = "particles";
     const string GpuParticles::UPDATE_SHADER_NAME = "update";
     const string GpuParticles::DRAW_SHADER_NAME = "draw";
-
     
     GpuParticles::GpuParticles() : currentReadFbo(0), textureLocation(0), width(0), height(0)
     {
@@ -44,9 +43,6 @@ namespace nm
     
     void GpuParticles::init(unsigned width, unsigned height, ofPrimitiveMode primitive, bool loadDefaultShaders, unsigned numDataTextures)
     {
-
-		// test git
-
         this->width = width;
         this->height = height;
         numFloats = width * height * FLOATS_PER_TEXEL;
@@ -66,6 +62,7 @@ namespace nm
             {
                 mesh.addVertex(ofVec3f(200.f * x / (float)width - 100.f, 200.f * y / (float)height - 100.f, -500.f));
                 mesh.addTexCoord(ofVec2f(x, y));
+				
             }
         }
         mesh.setMode(primitive);
@@ -96,6 +93,68 @@ namespace nm
             drawShader.load(DRAW_SHADER_NAME);
         }
     }
+
+	//-------------------------------------------------------------------------------------------------------------------------------------------------
+	void GpuParticles::init(unsigned width, unsigned height, ofColor * colors, ofPrimitiveMode primitive, bool loadShaders, unsigned numDataTextures) {
+		
+		
+		//image.loadImage("test.jpg");
+		
+		this->width = width;
+		this->height = height;
+		numFloats = width * height * FLOATS_PER_TEXEL;
+
+		// fbos
+		ofFbo::Settings s = getFboSettings(numDataTextures);
+		for (unsigned i = 0; i < 2; ++i)
+		{
+			fbos[i].allocate(s);
+		}
+
+		// mesh
+		mesh.clear();
+		for (int y = 0; y < height; ++y)
+		{
+			for (int x = 0; x < width; ++x)
+			{
+					mesh.addVertex(ofVec3f(200.f * x / (float)width - 100.f, 200.f * y / (float)height - 100.f, -500.f));
+					mesh.addTexCoord(ofVec2f(x, y));
+					mesh.addColor(colors[x + y * width]);
+			}
+		}
+		mesh.setMode(primitive);
+		
+		//mesh.enableColors();
+		//mesh.enableIndices();
+		//ofDisableArbTex();
+
+		quadMesh.addVertex(ofVec3f(-1.f, -1.f, 0.f));
+		quadMesh.addVertex(ofVec3f(1.f, -1.f, 0.f));
+		quadMesh.addVertex(ofVec3f(1.f, 1.f, 0.f));
+		quadMesh.addVertex(ofVec3f(-1.f, 1.f, 0.f));
+
+		quadMesh.addTexCoord(ofVec2f(0.f, 0.f));
+		quadMesh.addTexCoord(ofVec2f(width, 0.f));
+		quadMesh.addTexCoord(ofVec2f(width, height));
+		quadMesh.addTexCoord(ofVec2f(0.f, height));
+
+		quadMesh.addIndex(0);
+		quadMesh.addIndex(1);
+		quadMesh.addIndex(2);
+		quadMesh.addIndex(0);
+		quadMesh.addIndex(2);
+		quadMesh.addIndex(3);
+
+		quadMesh.setMode(OF_PRIMITIVE_TRIANGLES);
+
+		// shaders
+		if (loadShaders)
+		{
+			ofLogNotice("default loading shaders");
+			updateShader.load("shaders330/update");
+			drawShader.load("shaders330/draw");
+		}
+	}
     
     void GpuParticles::loadShaders(const string& updateShaderName, const string& drawShaderName)
     {
@@ -131,6 +190,7 @@ namespace nm
     {
         drawShader.begin();
         ofNotifyEvent(drawEvent, drawShader, this);
+		//drawShader.setUniformTexture("tex0", image.getTextureReference(), 0);
         setUniforms(drawShader);
         mesh.draw();
         drawShader.end();
@@ -143,6 +203,7 @@ namespace nm
         {
             ostringstream oss;
             oss << UNIFORM_PREFIX << ofToString(i);
+			
             shader.setUniformTexture(oss.str().c_str(), fbos[currentReadFbo].getTexture(i), textureLocationOffset + textureLocation);
             textureLocationOffset++;
         }

@@ -8,6 +8,7 @@ int main()
 #ifdef _PROGRAMMABLE_RENDERER
     ofGLFWWindowSettings settings;
     settings.setGLVersion(4, 1);
+	//settings.setGLVersion(3, 3);
     settings.setSize(1024, 768);
     ofCreateWindow(settings);
 #else
@@ -15,4 +16,5 @@ int main()
 	ofSetupOpenGL(&window, 1024,768, OF_WINDOW);
 #endif
     ofRunApp(new ofApp());
+
 }

@@ -28,4 +28,5 @@ private:
     
     ofxGpuParticles particles;
     ofEasyCam cam;
+	ofImage image;
 };

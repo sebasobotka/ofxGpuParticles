@@ -1,30 +1,161 @@
-*/bin/*.app
-bin/*.app
-*/xcuserdata
-*/*/xcuserdata
-*/*/*/xcuserdata
-*.swp
-*/*/*/*.swp
-*/*/*/*/*.swp
-.DS_Store
-*/.DS_Store
+#########################
+# openFrameworks data folder
+#########################
+
+example*/bin/*
+!/example*/bin/data
+
+bin/*
+!/bin/data/
+bin/data/*
+!/bin/data/fonts
+!/bin/data/ofxbraitsch
+!/bin/data/settings
+!/bin/data/shaders
+!/bin/data/ssl
+!/bin/data/images
+bin/data/images/*
+!/bin/data/images/pages
+!/bin/data/images/buttons
+!/bin/data/images/masks
+
+archiwum/
+
+*.xcodeproj
+
+#########################
+# openFrameworks patterns
+#########################
+
+# build files
+openFrameworks.a
+openFrameworksDebug.a
+openFrameworksUniversal.a
+libs/openFrameworksCompiled/lib/*/*
+!libs/openFrameworksCompiled/lib/*/.gitkeep
+
+# apothecary
+scripts/apothecary/build
+
+# rule to avoid non-official addons going into git
+# see addons/.gitignore
+addons/*
+
+# rule to avoid non-official apps going into git
+# see apps/.gitignore
+apps/*
+
+# also, see examples/.gitignore
+
+#########################
+# general
+#########################
+
+[Bb]uild/
+[Oo]bj/
+*.o
+*.slo
+*.lo
+*.obj
+[Dd]ebug*/
+[Rr]elease*/
+*.mode*
+*.app/
+*.pyc
+.svn/
+*.log
+*.cpp.eep
+*.cpp.elf
+*.cpp.hex
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+#########################
+# IDE
+#########################
+
+# XCode
+*.pbxuser
+*.perspective
+*.perspectivev3
+*.mode1v3
+*.mode2v3
+# XCode 4
+xcuserdata
+*.xcworkspace
+
+# Code::Blocks
+*.depend
+*.layout
+
+# Visual Studio
 *.sdf
-obj
-ipch
-*.vcxproj.user
 *.opensdf
 *.suo
-bin/*.dll
-bin/*.exe
-bin/*.exp
-bin/*.ilk
-bin/*.lib
-bin/*.pdb
-bin/data/test.mov
-bin/data/settings.xml
-*/libs/armeabi*
-*/bin/*
-!*/bin/data
-*/gen
-*/jni
-*/res/raw
+*.pdb
+*.ilk
+*.aps
+ipch/
+*.db
+*.opendb
+
+# Eclipse
+.metadata
+local.properties
+.externalToolBuilders
+
+#########################
+# operating system
+#########################
+
+# Linux
+*~
+# KDE
+.directory
+.AppleDouble
+
+# OSX
+.DS_Store
+*.swp
+*~.nib
+# Thumbnails
+._*
+
+# Windows
+# Windows image file caches
+Thumbs.db
+# Folder config file
+Desktop.ini
+#*.lnk
+#*.zip
+
+# Android
+.csettings
+/libs/openFrameworksCompiled/project/android/paths.make
+
+#########################
+# miscellaneous
+#########################
+
+.mailmap
