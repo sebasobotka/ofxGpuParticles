@@ -17,9 +17,7 @@ void main()
 	// i can pass color here
 	//colorVarying = vec4(1.0,1.0,0.0,0.1);
 		
-	colorVarying = vec4(texture(particles0, texCoordVarying).xyz, 0.1);
-	//colorVarying = texture(particles0, texCoordVarying);
-	//colorVarying = vec4(texture(particles0, texCoordVarying).rgb, 0.1);
-	
+	colorVarying = vec4(texture(particles0, texCoordVarying).rgb, 0.1);
+		
     gl_Position = modelViewProjectionMatrix * vec4(texture(particles0, texCoordVarying).xyz, 1.0);
 }
