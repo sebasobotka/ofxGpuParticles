@@ -36,6 +36,7 @@ namespace nm
     const string GpuParticles::UNIFORM_PREFIX = "particles";
     const string GpuParticles::UPDATE_SHADER_NAME = "update";
     const string GpuParticles::DRAW_SHADER_NAME = "draw";
+
     
     GpuParticles::GpuParticles() : currentReadFbo(0), textureLocation(0), width(0), height(0)
     {
@@ -43,6 +44,9 @@ namespace nm
     
     void GpuParticles::init(unsigned width, unsigned height, ofPrimitiveMode primitive, bool loadDefaultShaders, unsigned numDataTextures)
     {
+
+		// test git
+
         this->width = width;
         this->height = height;
         numFloats = width * height * FLOATS_PER_TEXEL;
