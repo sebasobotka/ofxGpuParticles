@@ -113,6 +113,8 @@ namespace nm
 
 		// mesh
 		mesh.clear();
+		mesh.enableColors();
+
 		for (int y = 0; y < height; ++y)
 		{
 			for (int x = 0; x < width; ++x)
@@ -124,7 +126,7 @@ namespace nm
 		}
 		mesh.setMode(primitive);
 		
-		//mesh.enableColors();
+	
 		//mesh.enableIndices();
 		//ofDisableArbTex();
 
